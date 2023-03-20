@@ -1,9 +1,13 @@
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-namespace Auth.Models{
+namespace Auth.Models
+{
 
     [PrimaryKey(nameof(UserId))]
-    public class UserInfo{
+    public class UserInfo
+    {
         public int UserId { get; set; }
         public string? DisplayName { get; set; }
         public string? UserName { get; set; }

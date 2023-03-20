@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Auth.Models;
+using Auth.Utils;
 
 namespace Auth.Controllers
 {
@@ -17,12 +18,12 @@ namespace Auth.Controllers
         [HttpGet]
         public List<UserInfo> GetAllUsers() => _context.getUsers();
 
-
         [HttpPost]
         public async Task<ActionResult<UserInfo>> CreateUserInfo(UserInfo st)
         {
-
-            _context.UserInfos.Add(st);
+            st.Password = Hashcode.getHashCode(st.Password!);
+            System.Console.WriteLine(st.Password);
+            _context.UserInfos!.Add(st);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetAllUsers), st);
         }

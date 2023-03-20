@@ -17,7 +17,7 @@ namespace Auth.Repository
         {
             try
             {
-                return _dbContext.Patients.ToList();
+                return _dbContext.Patients!.ToList();
             }
             catch
             {
@@ -29,7 +29,7 @@ namespace Auth.Repository
         {
             try
             {
-                Patient? Patient = _dbContext.Patients.Find(id);
+                Patient? Patient = _dbContext.Patients!.Find(id);
                 if (Patient != null)
                 {
                     return Patient;
@@ -49,7 +49,7 @@ namespace Auth.Repository
         {
             try
             {
-                _dbContext.Patients.Add(Patient);
+                _dbContext.Patients!.Add(Patient);
                 _dbContext.SaveChanges();
             }
             catch
@@ -75,7 +75,7 @@ namespace Auth.Repository
         {
             try
             {
-                Patient? Patient = _dbContext.Patients.Find(id);
+                Patient? Patient = _dbContext.Patients!.Find(id);
 
                 if (Patient != null)
                 {
@@ -96,7 +96,7 @@ namespace Auth.Repository
 
         public bool CheckPatient(int id)
         {
-            return _dbContext.Patients.Any(e => e.PatientId == id);
+            return _dbContext.Patients!.Any(e => e.PatientId == id);
         }
     }
 }

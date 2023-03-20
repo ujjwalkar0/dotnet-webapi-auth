@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Auth.Controllers
 {
+    // [Authorize]
     [Route("api/patient")]
     [ApiController]
     public class PatientController : ControllerBase
@@ -19,7 +20,7 @@ namespace Auth.Controllers
 
         // GET: api/Patient>
         [HttpGet]
-        [Authorize]
+        // [Authorize("Authorization")]
         public async Task<ActionResult<IEnumerable<Patient>>> Get()
         {
             return await Task.FromResult(_IPatient.GetPatientDetails());
@@ -46,42 +47,42 @@ namespace Auth.Controllers
         }
 
         // PUT api/Patient/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Patient>> Put(int id, Patient Patient)
-        {
-            if (id != Patient.PatientId)
-            {
-                return BadRequest();
-            }
-            try
-            {
-                _IPatient.UpdatePatient(Patient);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PatientExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return await Task.FromResult(Patient);
-        }
+        // [HttpPut("{id}")]
+        // public async Task<ActionResult<Patient>> Put(int id, Patient Patient)
+        // {
+        //     if (id != Patient.PatientId)
+        //     {
+        //         return BadRequest();
+        //     }
+        //     try
+        //     {
+        //         _IPatient.UpdatePatient(Patient);
+        //     }
+        //     catch (DbUpdateConcurrencyException)
+        //     {
+        //         if (!PatientExists(id))
+        //         {
+        //             return NotFound();
+        //         }
+        //         else
+        //         {
+        //             throw;
+        //         }
+        //     }
+        //     return await Task.FromResult(Patient);
+        // }
 
         // DELETE api/Patient/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Patient>> Delete(int id)
-        {
-            var Patient = _IPatient.DeletePatient(id);
-            return await Task.FromResult(Patient);
-        }
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<Patient>> Delete(int id)
+        // {
+        //     var Patient = _IPatient.DeletePatient(id);
+        //     return await Task.FromResult(Patient);
+        // }
 
-        private bool PatientExists(int id)
-        {
-            return _IPatient.CheckPatient(id);
-        }
+        // private bool PatientExists(int id)
+        // {
+        //     return _IPatient.CheckPatient(id);
+        // }
     }
 }

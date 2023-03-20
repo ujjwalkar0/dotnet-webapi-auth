@@ -24,12 +24,12 @@ namespace Auth.Migrations
 
             modelBuilder.Entity("Auth.Models.Patient", b =>
                 {
-                    b.Property<int>("PatientID")
+                    b.Property<int>("PatientId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("PatientID");
+                        .HasColumnName("PatientId");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PatientID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PatientId"));
 
                     b.Property<string>("LoginID")
                         .HasMaxLength(256)
@@ -41,13 +41,20 @@ namespace Auth.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(100)");
 
-                    b.HasKey("PatientID");
+                    b.HasKey("PatientId");
 
                     b.ToTable("Patient", (string)null);
                 });
 
             modelBuilder.Entity("Auth.Models.UserInfo", b =>
                 {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("UserId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+
                     b.Property<DateTime?>("CreatedDate")
                         .IsUnicode(false)
                         .HasColumnType("datetime2");
@@ -63,18 +70,16 @@ namespace Auth.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("Password")
-                        .HasMaxLength(20)
+                        .HasMaxLength(64)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int")
-                        .HasColumnName("UserId");
+                        .HasColumnType("varchar(64)");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(30)
                         .IsUnicode(false)
                         .HasColumnType("varchar(30)");
+
+                    b.HasKey("UserId");
 
                     b.ToTable("UserInfo", (string)null);
                 });
